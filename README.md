@@ -1,5 +1,5 @@
 # React + TypeScript + Vite
-Для введите ваш токен Authorization: `gh token`
+Введите ваш токен Authorization: `gh token`
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
