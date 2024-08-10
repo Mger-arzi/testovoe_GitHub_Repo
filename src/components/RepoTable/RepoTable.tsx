@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchRepos, setSelectedRepo } from '../../features/repoSlice';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRepos, setSelectedRepo } from "../../features/repoSlice";
 import {
   Table,
   TableBody,
@@ -11,10 +11,9 @@ import {
   Paper,
   CircularProgress,
   Pagination,
-
-} from '@mui/material';
-import { RootState } from '../../store';
-import s from './RepoTable.module.css';
+} from "@mui/material";
+import { RootState } from "../../store";
+import s from "./RepoTable.module.css";
 interface RepoTableProps {
   query: string;
   sortBy: string;
@@ -34,21 +33,21 @@ interface RepoTableProps {
  */
 export const RepoTable: React.FC<RepoTableProps> = ({ query, sortBy, sortDirection, page, setPage }) => {
   const dispatch = useDispatch();
-  const { items, loading, error } = useSelector((state: RootState) => state.repos);
+  const { items, loading } = useSelector((state: RootState) => state.repos);
 
   useEffect(() => {
     dispatch(fetchRepos({ q: query, sort: sortBy, order: sortDirection, page, per_page: 7 }));
   }, [dispatch, query, sortBy, sortDirection, page]);
 
   if (loading) return <CircularProgress />;
-  if (error) return <p>Error :(</p>;
+  // if (error) return <p>Error :(</p>;
 
   return (
     <div className={s.app}>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow style={{ background: '#dddd' }}>
+            <TableRow style={{ background: "#dddd" }}>
               <TableCell>Name</TableCell>
               <TableCell>Language</TableCell>
               <TableCell>Forks</TableCell>
@@ -70,9 +69,8 @@ export const RepoTable: React.FC<RepoTableProps> = ({ query, sortBy, sortDirecti
         </Table>
       </TableContainer>
       <Pagination
-        style={{ marginTop: '10px' }}
+        style={{ marginTop: "10px" }}
         count={10}
-
         page={page}
         onChange={(event, value) => setPage(value)}
         color="primary"
@@ -80,4 +78,3 @@ export const RepoTable: React.FC<RepoTableProps> = ({ query, sortBy, sortDirecti
     </div>
   );
 };
-
