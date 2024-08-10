@@ -42,7 +42,7 @@ export const fetchRepos = createAsyncThunk<Repo[], FetchReposParams>(
     const response = await axios.get('https://api.github.com/search/repositories', {
       params,
       headers: {
-        Authorization: `ghp token`,
+        Authorization: `gh token`,
       },
     });
     return response.data.items;

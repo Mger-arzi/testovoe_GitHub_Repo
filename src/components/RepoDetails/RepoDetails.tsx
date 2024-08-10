@@ -16,7 +16,7 @@ export const RepoDetails: React.FC = () => {
     <Paper elevation={3} style={{ padding: '16px', backgroundColor: '#70b2cc33', height: '90vh' }}>
       <Typography variant="h5">{selectedRepo.name}</Typography>
       <Typography variant="body1">{selectedRepo.description}</Typography>
-      <Typography variant="body2">License: {selectedRepo.license ? selectedRepo.license.name : 'None'}</Typography>
+      <Typography style={{ color: '#37a624', fontSize: '24px', marginTop: '15px' }} variant="body2">License: {selectedRepo.license ? selectedRepo.license.name : 'None'}</Typography>
     </Paper>
   );
 };
