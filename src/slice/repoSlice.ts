@@ -1,35 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { FetchReposParams, Repo, RepoState } from '../types/type';
 
-interface Repo {
-  id: number;
-  name: string;
-  language: string;
-  forks_count: number;
-  stargazers_count: number;
-  updated_at: string;
-  description: string;
-
-  license: {
-    name: string;
-  } | null;
-}
-
-interface RepoState {
-  items: Repo[];
-  loading: boolean;
-  error?: string | null;
-  selectedRepo: Repo | null;
-  totalCount: number;
-}
-
-interface FetchReposParams {
-  q: string;
-  sort: string;
-  order: string;
-  page: number;
-  per_page: number;
-}
 
 /**
  * Async thunk для загрузки репозиториев с GitHub API.

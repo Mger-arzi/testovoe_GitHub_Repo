@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRepos, setSelectedRepo } from "../../features/repoSlice";
+import { fetchRepos, setSelectedRepo } from "../../slice/repoSlice";
 import {
   Table,
   TableBody,
