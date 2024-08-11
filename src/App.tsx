@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Provider } from "react-redux";
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Grid, styled, Paper } from "@mui/material";
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Grid } from "@mui/material";
 import { store } from "./store";
 import { RepoDetails } from "./components/RepoDetails/RepoDetails";
 import { RepoTable } from "./components/RepoTable/RepoTable";
@@ -18,13 +18,6 @@ export const App: React.FC = () => {
     event.preventDefault();
     setPage(1);
   };
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
   return (
     <Provider store={store}>
       <Grid container spacing={2}>
@@ -67,9 +60,7 @@ export const App: React.FC = () => {
           </div>
           <Grid item xs={12}>
             <h3>Результат поиска</h3>
-            <Item>
-              <RepoTable query={query} sortBy={sortBy} sortDirection={sortDirection} page={page} setPage={setPage} />
-            </Item>
+            <RepoTable query={query} sortBy={sortBy} sortDirection={sortDirection} page={page} setPage={setPage} />
           </Grid>
         </Grid>
         <Grid item xs={4}>

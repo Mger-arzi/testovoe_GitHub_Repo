@@ -13,7 +13,8 @@ import {
   Pagination,
 } from "@mui/material";
 import { RootState } from "../../store";
-import s from "./RepoTable.module.css";
+import s from "./RepoTable.module.scss";
+
 interface RepoTableProps {
   query: string;
   sortBy: string;
@@ -33,21 +34,22 @@ interface RepoTableProps {
  */
 export const RepoTable: React.FC<RepoTableProps> = ({ query, sortBy, sortDirection, page, setPage }) => {
   const dispatch = useDispatch();
-  const { items, loading } = useSelector((state: RootState) => state.repos);
+  const { items, loading, error } = useSelector((state: RootState) => state.repos);
 
   useEffect(() => {
     dispatch(fetchRepos({ q: query, sort: sortBy, order: sortDirection, page, per_page: 7 }));
   }, [dispatch, query, sortBy, sortDirection, page]);
 
   if (loading) return <CircularProgress />;
-  // if (error) return <p>Error :(</p>;
+  if (error) return <p style={{ color: 'red' }}>Error : Введите корректные данные </p>;
+
 
   return (
-    <div className={s.app}>
+    <div className={s.table}>
       <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow style={{ background: "#dddd" }}>
+        <Table >
+          <TableHead className={s.tableRow}>
+            <TableRow >
               <TableCell>Name</TableCell>
               <TableCell>Language</TableCell>
               <TableCell>Forks</TableCell>
@@ -58,7 +60,7 @@ export const RepoTable: React.FC<RepoTableProps> = ({ query, sortBy, sortDirecti
           <TableBody>
             {items.map((repo) => (
               <TableRow key={repo.id} onClick={() => dispatch(setSelectedRepo(repo))}>
-                <TableCell>{repo.name}</TableCell>
+                <TableCell ><u>{repo.name}</u></TableCell>
                 <TableCell>{repo.language}</TableCell>
                 <TableCell>{repo.forks_count}</TableCell>
                 <TableCell>{repo.stargazers_count}</TableCell>
